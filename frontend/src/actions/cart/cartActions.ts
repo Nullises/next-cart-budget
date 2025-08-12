@@ -1,12 +1,11 @@
 import { CartItem } from "@/app/interfaces/cartItem";
 
-const API_URL = "http://localhost:3000/api/cart";
-
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 /**
  * GET CURRENT CART
  */
 export const getCart = async (): Promise<CartItem[]> => {
-  const response = await fetch(API_URL);
+  const response = await fetch(`${API_BASE_URL}/api/cart`);
   if (!response.ok) {
     throw new Error("No se pudo obtener el carrito del backend.");
   }
@@ -20,7 +19,7 @@ export const postToCart = async (
   productId: number,
   quantity: number = 1
 ): Promise<CartItem[]> => {
-  const response = await fetch(API_URL, {
+  const response = await fetch(`${API_BASE_URL}/api/cart`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: productId, quantity }),
@@ -36,10 +35,12 @@ export const postToCart = async (
 };
 
 /**
- * CLEAR CART
+ * CLEAR CART IN BACKEND
  */
 export const clearBackendCart = async (): Promise<CartItem[]> => {
-  const response = await fetch(API_URL, { method: "DELETE" });
+  const response = await fetch(`${API_BASE_URL}/api/cart`, {
+    method: "DELETE",
+  });
   if (!response.ok) {
     throw new Error("No se pudo limpiar el carrito en el backend.");
   }

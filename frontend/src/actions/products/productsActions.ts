@@ -1,5 +1,7 @@
 import { Product } from "@/app/interfaces/product";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 /**
  * GET ALL PRODUCTS FROM BACKEND
  * @returns Promise with Array Products
@@ -7,7 +9,7 @@ import { Product } from "@/app/interfaces/product";
  */
 export const getProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch("http://localhost:3000/api/products");
+    const response = await fetch(`${API_BASE_URL}/api/products`);
 
     if (!response.ok) {
       throw new Error(`Error del servidor: ${response.status}`);
