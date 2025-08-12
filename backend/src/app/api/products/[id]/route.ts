@@ -1,11 +1,11 @@
-import { Product } from "@/app/interfaces/product";
+import { NextResponse, NextRequest } from "next/server";
 import { products } from "@/lib/products";
-import { NextRequest, NextResponse } from "next/server";
+import { Product } from "@/app/interfaces/product";
 
 /**
  * GET PRODUCT BY ID
- * @param _request The NextRequest object
- * @param context The context containing dynamic route parameters.
+ * @param request The NextRequest object (not used, but required by convention).
+ * @param params The dynamic route parameters destructured from the context.
  * @returns JSON with the product object or a 404 error if not found.
  */
 export async function GET(
