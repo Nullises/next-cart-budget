@@ -1,12 +1,6 @@
 import { Product } from "@/app/interfaces/product";
 import { products } from "@/lib/products";
-import { NextResponse } from "next/server";
-
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * GET PRODUCT BY ID
@@ -15,10 +9,10 @@ interface RouteContext {
  * @returns JSON with the product object or a 404 error if not found.
  */
 export async function GET(
-  _request: Request,
-  context: RouteContext
+  request: NextRequest,
+  { params }: { params: { id: string } }
 ): Promise<NextResponse<Product | { message: string }>> {
-  const productId = parseInt(context.params.id, 10);
+  const productId = parseInt(params.id, 10);
 
   if (isNaN(productId)) {
     return NextResponse.json(
