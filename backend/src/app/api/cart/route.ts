@@ -84,3 +84,11 @@ export async function POST(request: NextRequest) {
     return handleError(error);
   }
 }
+
+/**
+ * DELETE CART
+ */
+export async function DELETE() {
+  cart = [];
+  return NextResponse.json(cart, { status: 200 });
+}
