@@ -9,7 +9,6 @@ interface CartContextType {
   cart: CartItem[];
   isLoading: boolean;
   error: string | null;
-  // La función principal que el componente llamará
   calculateAndSetOptimalCart: (
     allProducts: Product[],
     budget: number
@@ -45,7 +44,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const numCombinations = 1 << allProducts.length;
 
       for (let i = 0; i < numCombinations; i++) {
-        let currentCombination: Product[] = [];
+        const currentCombination: Product[] = [];
         let currentPrice = 0;
         for (let j = 0; j < allProducts.length; j++) {
           if ((i >> j) & 1) {
