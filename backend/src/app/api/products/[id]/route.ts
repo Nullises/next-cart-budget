@@ -4,14 +4,15 @@ import { Product } from "@/app/interfaces/product";
 
 /**
  * GET PRODUCT BY ID
- * @param request The NextRequest object (not used, but required by convention).
- * @param params The dynamic route parameters destructured from the context.
+ * @param request The NextRequest object.
+ * @param context An object containing the route parameters.
  * @returns JSON with the product object or a 404 error if not found.
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ): Promise<NextResponse<Product | { message: string }>> {
+  const { params } = context;
   const productId = parseInt(params.id, 10);
 
   if (isNaN(productId)) {
